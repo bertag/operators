@@ -5,6 +5,6 @@ package net.bertag.operators.api
  *
  * @param <T> the type of implementation
  */
-interface Multiply<T> {
+interface Multipliable<T> {
     operator fun times(other: T): T
 }

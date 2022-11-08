@@ -5,6 +5,6 @@ package net.bertag.operators.api
  *
  * @param <T> the type of implementation
  */
-interface Add<T> {
+interface Addable<T> {
     operator fun plus(other: T): T
 }

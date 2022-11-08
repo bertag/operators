@@ -5,6 +5,6 @@ package net.bertag.operators.api
  *
  * @param <T> the type of implementation
  */
-interface Subtract<T> {
+interface Subtractable<T> {
     operator fun minus(other: T): T
 }

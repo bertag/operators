@@ -6,6 +6,6 @@ package net.bertag.operators.api
  *
  * @param <T> the type of implementation
  */
-interface Divide<T> {
+interface Dividable<T> {
     operator fun div(other: T): T
 }
