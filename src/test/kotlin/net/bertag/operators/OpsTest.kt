@@ -12,6 +12,9 @@ import org.junit.jupiter.params.provider.ArgumentsSource
 import org.junit.jupiter.params.provider.CsvSource
 import java.util.stream.Stream
 
+/**
+ * Unit tests for Ops.kt.
+ */
 class OpsTest {
 
     companion object {

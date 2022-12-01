@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiPredicate;
 import java.util.stream.Stream;
@@ -16,6 +17,9 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.within;
 
+/**
+ * Unit tests for {@link Ops} that demonstrate compatibility with Java.
+ */
 public class JavaOpsTest {
 
     private static final double delta = 0.001;
@@ -24,7 +28,7 @@ public class JavaOpsTest {
 
     private static final MyData data1 = new MyData("key1", 1, 1.1);
     private static final MyData data2 = new MyData("key2", 2, 2.2);
-    private static final List<Arguments> baseArgs = List.of(
+    private static final List<Arguments> baseArgs = Arrays.asList(
             Arguments.of(null, null, null),
             Arguments.of(data1, null, data1),
             Arguments.of(null, data2, data2));

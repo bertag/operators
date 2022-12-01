@@ -3,6 +3,4 @@
 !/.gitignore
 !/LICENSE.md
 !/README.md
-!/build.gradle.kts
-!/gradle.properties
-!/settings.gradle.kts
+!/pom.xml
