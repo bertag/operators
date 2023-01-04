@@ -4,8 +4,12 @@ package net.bertag.operators
 import net.bertag.operators.api.Addable
 import net.bertag.operators.api.Dividable
 import net.bertag.operators.api.Multipliable
+import net.bertag.operators.api.Scalable
 import net.bertag.operators.api.Subtractable
+import java.util.function.BiFunction
 import java.util.function.BinaryOperator
+import kotlin.math.roundToInt
+import kotlin.math.roundToLong
 
 /**
  * Adds the two numbers together (e.g.: `a + b`) if at least one input is non-null (substituting 0 for the
@@ -252,8 +256,69 @@ operator fun Double?.div(other: Double?) = if (allNull(this, other)) null else (
 operator fun <T : Dividable<T>> T?.div(other: T?) = op(other) { x, y -> x / y }
 
 /**
- * Performs the given operation on the given inputs if they are both non-null.  If one input is null, the other
- * input is returned; if both are null, null is returned.
+ * Multiplies the two numbers together (e.g.: `a * b`) if at least one input is non-null (substituting 1 for
+ * the other input if it is null), or null if both inputs are null.
+ *
+ * @receiver some nullable number
+ * @param factor another nullable number
+ * @return the product as described
+ */
+fun Int?.scale(factor: Double?) = if (this == null) null else (this * (factor ?: 1.0)).roundToInt()
+
+/**
+ * Multiplies the two numbers together (e.g.: `a * b`) if at least one input is non-null (substituting 1 for
+ * the other input if it is null), or null if both inputs are null.
+ *
+ * @receiver some nullable number
+ * @param factor another nullable number
+ * @return the product as described
+ */
+fun Long?.scale(factor: Double?) = if (this == null) null else (this * (factor ?: 1.0)).roundToLong()
+
+/**
+ * Multiplies the two numbers together (e.g.: `a * b`) if at least one input is non-null (substituting 1 for
+ * the other input if it is null), or null if both inputs are null.
+ *
+ * @receiver some nullable number
+ * @param factor another nullable number
+ * @return the product as described
+ */
+fun Short?.scale(factor: Double?) = if (this == null) null else (this * (factor ?: 1.0)).roundToInt().toShort()
+
+/**
+ * Multiplies the two numbers together (e.g.: `a * b`) if at least one input is non-null (substituting 1 for
+ * the other input if it is null), or null if both inputs are null.
+ *
+ * @receiver some nullable number
+ * @param factor another nullable number
+ * @return the product as described
+ */
+fun Float?.scale(factor: Double?) = if (this == null) null else (this * (factor ?: 1.0)).toFloat()
+
+/**
+ * Multiplies the two numbers together (e.g.: `a * b`) if at least one input is non-null (substituting 1 for
+ * the other input if it is null), or null if both inputs are null.
+ *
+ * @receiver some nullable number
+ * @param factor another nullable number
+ * @return the product as described
+ */
+fun Double?.scale(factor: Double?) = if (this == null) null else (this * (factor ?: 1.0))
+
+/**
+ * Scales this object using [Scalable.scale] if both inputs are non-null.  If `this` object is null, null is returned;
+ * if the factor is null, then the other input is returned as is.
+ *
+ * @receiver some nullable object
+ * @param factor another nullable object
+ * @return the product as described
+ * @param <T> the type of objects being multiplied
+ */
+fun <T : Scalable<T>> T?.scale(factor: Double?): T? = this.apply(factor) { x, y -> x.scale(y) }
+
+/**
+ * Performs the given operation on the given inputs if they are both non-null.  If one input is null, the other input is
+ * returned; if both are null, null is returned.
  *
  * @receiver some nullable object
  * @param other another nullable object
@@ -263,6 +328,22 @@ operator fun <T : Dividable<T>> T?.div(other: T?) = op(other) { x, y -> x / y }
  */
 fun <T> T?.op(other: T?, opFunction: BinaryOperator<T>): T? {
     return if (this == null) other
+    else if (other == null) this
+    else opFunction.apply(this, other)
+}
+
+/**
+ * Applies the given transformation to an object if the other input is non-null.  If `this` is null, then null is
+ * returned; if `other` is null, then `this` will be returned.
+ *
+ * @receiver some nullable object
+ * @param other another nullable object
+ * @param opFunction the operation to perform
+ * @return the result as described
+ * @param <T> the type of objects being operated upon
+ */
+fun <T, U> T?.apply(other: U?, opFunction: BiFunction<T, U, T>): T? {
+    return if (this == null) null
     else if (other == null) this
     else opFunction.apply(this, other)
 }

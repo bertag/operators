@@ -22,8 +22,8 @@ class OpsTest {
         private val doubleEquals = fun(x: Double?, y: Double?): Boolean =
             if (x == null || y == null) x == null && y == null else (x / y) - 1.0 <= delta
 
-        private val data1 = MyData("key1", 1, 1.1)
-        private val data2 = MyData("key2", 2, 2.2)
+        private val data1 = MyData("key1", 2.0)
+        private val data2 = MyData("key2", 3.0)
         private val baseArgs = listOf(
             Arguments.of(null, null, null),
             Arguments.of(data1, null, data1),
@@ -38,7 +38,7 @@ class OpsTest {
         fun shouldAddNullableInt(a: Int?, b: Int?, expectedResult: Int?) {
             // GIVEN two nullable ints `a` and `b`.
             // WHEN a.plus(b) is called...
-            val result = a.plus(b)
+            val result = a + b
 
             // THEN it should return the expected result.
             assertThat(result).isEqualTo(expectedResult)
@@ -49,7 +49,7 @@ class OpsTest {
         fun shouldAddNullableLong(a: Long?, b: Long?, expectedResult: Long?) {
             // GIVEN two nullable longs `a` and `b`.
             // WHEN a.plus(b) is called...
-            val result = a.plus(b)
+            val result = a + b
 
             // THEN it should return the expected result.
             assertThat(result).isEqualTo(expectedResult)
@@ -60,7 +60,7 @@ class OpsTest {
         fun shouldAddNullableShort(a: Short?, b: Short?, expectedResult: Short?) {
             // GIVEN two nullable shorts `a` and `b`.
             // WHEN a.plus(b) is called...
-            val result = a.plus(b)
+            val result = a + b
 
             // THEN it should return the expected result.
             assertThat(result).isEqualTo(expectedResult)
@@ -71,7 +71,7 @@ class OpsTest {
         fun shouldAddNullableFloat(a: Float?, b: Float?, expectedResult: Float?) {
             // GIVEN two nullable floats `a` and `b`.
             // WHEN a.plus(b) is called...
-            val result = a.plus(b)
+            val result = a + b
 
             // THEN it should return the expected result.
             when (expectedResult) {
@@ -85,7 +85,7 @@ class OpsTest {
         fun shouldAddNullableDouble(a: Double?, b: Double?, expectedResult: Double?) {
             // GIVEN two nullable doubles `a` and `b`.
             // WHEN a.plus(b) is called...
-            val result = a.plus(b)
+            val result = a + b
 
             // THEN it should return the expected result.
             when (expectedResult) {
@@ -99,7 +99,7 @@ class OpsTest {
         fun shouldAddNullableObject(a: MyData?, b: MyData?, expectedResult: MyData?) {
             // GIVEN two nullable objects `a` and `b`.
             // WHEN a.plus(b) is called...
-            val result = a.plus(b)
+            val result = a + b
 
             // THEN it should return the expected result.
             assertThat(result).usingRecursiveComparison()
@@ -110,7 +110,7 @@ class OpsTest {
 
     private class AddObjectArgProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<Arguments> =
-            Stream.concat(baseArgs.stream(), Stream.of(Arguments.of(data1, data2, MyData("key1", 3, 3.3))))
+            Stream.concat(baseArgs.stream(), Stream.of(Arguments.of(data1, data2, MyData("key1", 5.0))))
     }
 
     @Nested
@@ -121,7 +121,7 @@ class OpsTest {
         fun shouldSubtractNullableInt(a: Int?, b: Int?, expectedResult: Int?) {
             // GIVEN two nullable ints `a` and `b`.
             // WHEN a.minus(b) is called...
-            val result = a.minus(b)
+            val result = a - b
 
             // THEN it should return the expected result.
             assertThat(result).isEqualTo(expectedResult)
@@ -132,7 +132,7 @@ class OpsTest {
         fun shouldSubtractNullableLong(a: Long?, b: Long?, expectedResult: Long?) {
             // GIVEN two nullable longs `a` and `b`.
             // WHEN a.minus(b) is called...
-            val result = a.minus(b)
+            val result = a - b
 
             // THEN it should return the expected result.
             assertThat(result).isEqualTo(expectedResult)
@@ -143,7 +143,7 @@ class OpsTest {
         fun shouldSubtractNullableShort(a: Short?, b: Short?, expectedResult: Short?) {
             // GIVEN two nullable shorts `a` and `b`.
             // WHEN a.minus(b) is called...
-            val result = a.minus(b)
+            val result = a - b
 
             // THEN it should return the expected result.
             assertThat(result).isEqualTo(expectedResult)
@@ -154,7 +154,7 @@ class OpsTest {
         fun shouldSubtractNullableFloat(a: Float?, b: Float?, expectedResult: Float?) {
             // GIVEN two nullable floats `a` and `b`.
             // WHEN a.minus(b) is called...
-            val result = a.minus(b)
+            val result = a - b
 
             // THEN it should return the expected result.
             when (expectedResult) {
@@ -168,7 +168,7 @@ class OpsTest {
         fun shouldSubtractNullableDouble(a: Double?, b: Double?, expectedResult: Double?) {
             // GIVEN two nullable doubles `a` and `b`.
             // WHEN a.minus(b) is called...
-            val result = a.minus(b)
+            val result = a - b
 
             // THEN it should return the expected result.
             when (expectedResult) {
@@ -182,7 +182,7 @@ class OpsTest {
         fun shouldSubtractNullableObject(a: MyData?, b: MyData?, expectedResult: MyData?) {
             // GIVEN two nullable objects `a` and `b`.
             // WHEN a.minus(b) is called...
-            val result = a.minus(b)
+            val result = a - b
 
             // THEN it should return the expected result.
             assertThat(result).usingRecursiveComparison()
@@ -193,7 +193,7 @@ class OpsTest {
 
     private class SubtractObjectArgProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<Arguments> =
-            Stream.concat(baseArgs.stream(), Stream.of(Arguments.of(data1, data2, MyData("key1", -1, -1.1))))
+            Stream.concat(baseArgs.stream(), Stream.of(Arguments.of(data1, data2, MyData("key1", -1.0))))
     }
 
     @Nested
@@ -204,7 +204,7 @@ class OpsTest {
         fun shouldMultiplyNullableInt(a: Int?, b: Int?, expectedResult: Int?) {
             // GIVEN two nullable ints `a` and `b`.
             // WHEN a.times(b) is called...
-            val result = a.times(b)
+            val result = a * b
 
             // THEN it should return the expected result.
             assertThat(result).isEqualTo(expectedResult)
@@ -215,7 +215,7 @@ class OpsTest {
         fun shouldMultiplyNullableLong(a: Long?, b: Long?, expectedResult: Long?) {
             // GIVEN two nullable longs `a` and `b`.
             // WHEN a.times(b) is called...
-            val result = a.times(b)
+            val result = a * b
 
             // THEN it should return the expected result.
             assertThat(result).isEqualTo(expectedResult)
@@ -226,7 +226,7 @@ class OpsTest {
         fun shouldMultiplyNullableShort(a: Short?, b: Short?, expectedResult: Short?) {
             // GIVEN two nullable shorts `a` and `b`.
             // WHEN a.times(b) is called...
-            val result = a.times(b)
+            val result = a * b
 
             // THEN it should return the expected result.
             assertThat(result).isEqualTo(expectedResult)
@@ -237,7 +237,7 @@ class OpsTest {
         fun shouldMultiplyNullableFloat(a: Float?, b: Float?, expectedResult: Float?) {
             // GIVEN two nullable floats `a` and `b`.
             // WHEN a.times(b) is called...
-            val result = a.times(b)
+            val result = a * b
 
             // THEN it should return the expected result.
             when (expectedResult) {
@@ -251,7 +251,7 @@ class OpsTest {
         fun shouldMultiplyNullableDouble(a: Double?, b: Double?, expectedResult: Double?) {
             // GIVEN two nullable doubles `a` and `b`.
             // WHEN a.times(b) is called...
-            val result = a.times(b)
+            val result = a * b
 
             // THEN it should return the expected result.
             when (expectedResult) {
@@ -264,8 +264,8 @@ class OpsTest {
         @ArgumentsSource(MultiplyObjectArgProvider::class)
         fun shouldMultiplyNullableObject(a: MyData?, b: MyData?, expectedResult: MyData?) {
             // GIVEN two nullable objects `a` and `b`.
-            // WHEN a.minus(b) is called...
-            val result = a.times(b)
+            // WHEN a.times(b) is called...
+            val result = a * b
 
             // THEN it should return the expected result.
             assertThat(result).usingRecursiveComparison()
@@ -276,7 +276,7 @@ class OpsTest {
 
     private class MultiplyObjectArgProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<Arguments> =
-            Stream.concat(baseArgs.stream(), Stream.of(Arguments.of(data1, data2, MyData("key1", 2, 2.42))))
+            Stream.concat(baseArgs.stream(), Stream.of(Arguments.of(data1, data2, MyData("key1", 6.0))))
     }
 
     @Nested
@@ -287,7 +287,7 @@ class OpsTest {
         fun shouldDivideNullableInt(a: Int?, b: Int?, expectedResult: Int?) {
             // GIVEN two nullable ints `a` and `b`.
             // WHEN a.div(b) is called...
-            val result = a.div(b)
+            val result = a / b
 
             // THEN it should return the expected result.
             assertThat(result).isEqualTo(expectedResult)
@@ -298,7 +298,7 @@ class OpsTest {
         fun shouldDivideNullableLong(a: Long?, b: Long?, expectedResult: Long?) {
             // GIVEN two nullable longs `a` and `b`.
             // WHEN a.div(b) is called...
-            val result = a.div(b)
+            val result = a / b
 
             // THEN it should return the expected result.
             assertThat(result).isEqualTo(expectedResult)
@@ -309,7 +309,7 @@ class OpsTest {
         fun shouldDivideNullableShort(a: Short?, b: Short?, expectedResult: Short?) {
             // GIVEN two nullable shorts `a` and `b`.
             // WHEN a.div(b) is called...
-            val result = a.div(b)
+            val result = a / b
 
             // THEN it should return the expected result.
             assertThat(result).isEqualTo(expectedResult)
@@ -320,7 +320,7 @@ class OpsTest {
         fun shouldDivideNullableFloat(a: Float?, b: Float?, expectedResult: Float?) {
             // GIVEN two nullable floats `a` and `b`.
             // WHEN a.div(b) is called...
-            val result = a.div(b)
+            val result = a / b
 
             // THEN it should return the expected result.
             when (expectedResult) {
@@ -334,7 +334,7 @@ class OpsTest {
         fun shouldDivideNullableDouble(a: Double?, b: Double?, expectedResult: Double?) {
             // GIVEN two nullable doubles `a` and `b`.
             // WHEN a.div(b) is called...
-            val result = a.div(b)
+            val result = a / b
 
             // THEN it should return the expected result.
             when (expectedResult) {
@@ -347,7 +347,7 @@ class OpsTest {
         @ArgumentsSource(DivideObjectArgProvider::class)
         fun shouldDivideNullableObject(a: MyData?, b: MyData?, expectedResult: MyData?) {
             // GIVEN two nullable objects `a` and `b`.
-            // WHEN a.minus(b) is called...
+            // WHEN a.div(b) is called...
             val result = a.div(b)
 
             // THEN it should return the expected result.
@@ -359,6 +359,92 @@ class OpsTest {
 
     private class DivideObjectArgProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<Arguments> =
-            Stream.concat(baseArgs.stream(), Stream.of(Arguments.of(data1, data2, MyData("key1", 0, 0.5))))
+            Stream.concat(baseArgs.stream(), Stream.of(Arguments.of(data1, data2, MyData("key1", 2.0 / 3.0))))
+    }
+
+    @Nested
+    inner class ScalableTest {
+
+        @ParameterizedTest
+        @CsvSource(", , , ", "1, , 1", ", 2.0, ", "3, 1.5, 5")
+        fun shouldScaleNullableInt(obj: Int?, factor: Double?, expectedResult: Int?) {
+            // GIVEN a nullable object `obj` and a factor.
+            // WHEN obj.scale(factor) is called...
+            val result = obj.scale(factor)
+
+            // THEN it should return the expected result.
+            assertThat(result).isEqualTo(expectedResult)
+        }
+
+        @ParameterizedTest
+        @CsvSource(", , , ", "1, , 1", ", 2.0, ", "3, 1.5, 5")
+        fun shouldScaleNullableLong(obj: Long?, factor: Double?, expectedResult: Long?) {
+            // GIVEN a nullable object `obj` and a factor.
+            // WHEN obj.scale(factor) is called...
+            val result = obj.scale(factor)
+
+            // THEN it should return the expected result.
+            assertThat(result).isEqualTo(expectedResult)
+        }
+
+        @ParameterizedTest
+        @CsvSource(", , , ", "1, , 1", ", 2.0, ", "3, 1.5, 5")
+        fun shouldScaleNullableShort(obj: Short?, factor: Double?, expectedResult: Short?) {
+            // GIVEN a nullable object `obj` and a factor.
+            // WHEN obj.scale(factor) is called...
+            val result = obj.scale(factor)
+
+            // THEN it should return the expected result.
+            assertThat(result).isEqualTo(expectedResult)
+        }
+
+        @ParameterizedTest
+        @CsvSource(", , , ", "1, , 1", ", 2.0, ", "3, 1.5, 4.5")
+        fun shouldScaleNullableFloat(obj: Float?, factor: Double?, expectedResult: Float?) {
+            // GIVEN a nullable object `obj` and a factor.
+            // WHEN obj.scale(factor) is called...
+            val result = obj.scale(factor)
+
+            // THEN it should return the expected result.
+            when (expectedResult) {
+                null -> assertThat(result).isNull()
+                else -> assertThat(result).isEqualTo(expectedResult, within(delta.toFloat()))
+            }
+        }
+
+        @ParameterizedTest
+        @CsvSource(", , , ", "1, , 1", ", 2.0, ", "3, 1.5, 4.5")
+        fun shouldScaleNullableDouble(obj: Double?, factor: Double?, expectedResult: Double?) {
+            // GIVEN a nullable object `obj` and a factor.
+            // WHEN obj.scale(factor) is called...
+            val result = obj.scale(factor)
+
+            // THEN it should return the expected result.
+            when (expectedResult) {
+                null -> assertThat(result).isNull()
+                else -> assertThat(result).isEqualTo(expectedResult, within(delta))
+            }
+        }
+
+        @ParameterizedTest
+        @ArgumentsSource(ScalableObjectArgProvider::class)
+        fun shouldScaleNullableObject(obj: MyData?, factor: Double?, expectedResult: MyData?) {
+            // GIVEN a nullable object `obj` and a factor.
+            // WHEN obj.scale(factor) is called...
+            val result = obj.scale(factor)
+
+            // THEN it should return the expected result.
+            assertThat(result).usingRecursiveComparison()
+                .withEqualsForType(doubleEquals, Double::class.java)
+                .isEqualTo(expectedResult)
+        }
+    }
+
+    private class ScalableObjectArgProvider : ArgumentsProvider {
+        override fun provideArguments(context: ExtensionContext?): Stream<Arguments> = Stream.of(
+            Arguments.of(null, null, null),
+            Arguments.of(data2, null, data2),
+            Arguments.of(null, 1.0, null),
+            Arguments.of(data2, 1.5, MyData("key2", 4.5)))
     }
 }
