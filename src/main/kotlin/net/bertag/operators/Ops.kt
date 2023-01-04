@@ -256,63 +256,62 @@ operator fun Double?.div(other: Double?) = if (allNull(this, other)) null else (
 operator fun <T : Dividable<T>> T?.div(other: T?) = op(other) { x, y -> x / y }
 
 /**
- * Multiplies the two numbers together (e.g.: `a * b`) if at least one input is non-null (substituting 1 for
- * the other input if it is null), or null if both inputs are null.
+ * Scales a number by a given factor if both are non-null.  If the receiver (Kotlin) — or first argument (Java) — is
+ * null, null is returned; if the factor is null, no scaling will be applied.
  *
  * @receiver some nullable number
- * @param factor another nullable number
- * @return the product as described
+ * @param factor a nullable factor
+ * @return the scaled result as described, rounded to the nearest integer
  */
 fun Int?.scale(factor: Double?) = if (this == null) null else (this * (factor ?: 1.0)).roundToInt()
 
 /**
- * Multiplies the two numbers together (e.g.: `a * b`) if at least one input is non-null (substituting 1 for
- * the other input if it is null), or null if both inputs are null.
+ * Scales a number by a given factor if both are non-null.  If the receiver (Kotlin) — or first argument (Java) — is
+ * null, null is returned; if the factor is null, no scaling will be applied.
  *
  * @receiver some nullable number
- * @param factor another nullable number
- * @return the product as described
+ * @param factor a nullable factor
+ * @return the scaled result as described, rounded to the nearest (long) integer
  */
 fun Long?.scale(factor: Double?) = if (this == null) null else (this * (factor ?: 1.0)).roundToLong()
 
 /**
- * Multiplies the two numbers together (e.g.: `a * b`) if at least one input is non-null (substituting 1 for
- * the other input if it is null), or null if both inputs are null.
+ * Scales a number by a given factor if both are non-null.  If the receiver (Kotlin) — or first argument (Java) — is
+ * null, null is returned; if the factor is null, no scaling will be applied.
  *
  * @receiver some nullable number
- * @param factor another nullable number
- * @return the product as described
+ * @param factor a nullable factor
+ * @return the scaled result as described, rounded to the nearest (short) integer
  */
 fun Short?.scale(factor: Double?) = if (this == null) null else (this * (factor ?: 1.0)).roundToInt().toShort()
 
 /**
- * Multiplies the two numbers together (e.g.: `a * b`) if at least one input is non-null (substituting 1 for
- * the other input if it is null), or null if both inputs are null.
+ * Scales a number by a given factor if both are non-null.  If the receiver (Kotlin) — or first argument (Java) — is
+ * null, null is returned; if the factor is null, no scaling will be applied.
  *
  * @receiver some nullable number
- * @param factor another nullable number
- * @return the product as described
+ * @param factor a nullable factor
+ * @return the scaled result as described
  */
 fun Float?.scale(factor: Double?) = if (this == null) null else (this * (factor ?: 1.0)).toFloat()
 
 /**
- * Multiplies the two numbers together (e.g.: `a * b`) if at least one input is non-null (substituting 1 for
- * the other input if it is null), or null if both inputs are null.
+ * Scales a number by a given factor if both are non-null.  If the receiver (Kotlin) — or first argument (Java) — is
+ * null, null is returned; if the factor is null, no scaling will be applied.
  *
  * @receiver some nullable number
- * @param factor another nullable number
- * @return the product as described
+ * @param factor a nullable factor
+ * @return the scaled result as described
  */
 fun Double?.scale(factor: Double?) = if (this == null) null else (this * (factor ?: 1.0))
 
 /**
- * Scales this object using [Scalable.scale] if both inputs are non-null.  If `this` object is null, null is returned;
- * if the factor is null, then the other input is returned as is.
+ * Scales a [Scalable] object by a given factor if both are non-null.  If the receiver (Kotlin) — or first argument
+ * (Java) — is null, null is returned; if the factor is null, no scaling will be applied.
  *
- * @receiver some nullable object
- * @param factor another nullable object
- * @return the product as described
- * @param <T> the type of objects being multiplied
+ * @receiver some nullable number
+ * @param factor a nullable factor
+ * @return the scaled result as described
  */
 fun <T : Scalable<T>> T?.scale(factor: Double?): T? = this.apply(factor) { x, y -> x.scale(y) }
 
@@ -333,8 +332,8 @@ fun <T> T?.op(other: T?, opFunction: BinaryOperator<T>): T? {
 }
 
 /**
- * Applies the given transformation to an object if the other input is non-null.  If `this` is null, then null is
- * returned; if `other` is null, then `this` will be returned.
+ * Applies the given transformation to an object if the other input is non-null.  If the receiver (Kotlin) — or first
+ * argument (Java) — is null, then null is returned; if `other` is null, then the receiver will be returned.
  *
  * @receiver some nullable object
  * @param other another nullable object
