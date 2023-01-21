@@ -27,7 +27,7 @@ When both operands are non-null, they are converted to their corresponding primi
 | 6.0 | 5.0 | `scale(a, b)` | 30                      |
 | 3L  | 1.5 | `scale(a, b)` | 5 (rounded up from 4.5) |
 
-With the exception of `scale`, when one operand is non-null but the other operand is null, the null operand is substituted by a fallback/default value before the appropriate math is performed.  The fallback values (`0` for addition and subtraction; `1` for multiplication and division) have been chosen to best preserve identity and reflexive equality for each operation, as shown in the table below:
+Except for `scale`, when one operand is non-null but the other operand is null, the null operand is substituted by a fallback/default value before the appropriate math is performed.  The fallback values (`0` for addition and subtraction; `1` for multiplication and division) have been chosen to best preserve identity and reflexive equality for each operation, as shown in the table below:
 
 | `a`   | `b`   | Operation      | Substitution | Result | Demonstration of Identity/Equality      |
 |-------|-------|----------------|--------------|--------|-----------------------------------------|

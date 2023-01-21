@@ -12,8 +12,8 @@ import kotlin.math.roundToInt
 import kotlin.math.roundToLong
 
 /**
- * Adds the two numbers together (e.g.: `a + b`) if at least one input is non-null (substituting 0 for the
- * other input if it is null), or null if both inputs are null.
+ * Adds the two numbers together (`a + b`) if at least one input is non-null (substituting 0 for the
+ * other input if it is null), or returning null if both inputs are null.
  *
  * @receiver some nullable number
  * @param other another nullable number
@@ -22,8 +22,8 @@ import kotlin.math.roundToLong
 operator fun Int?.plus(other: Int?) = if (allNull(this, other)) null else (this ?: 0) + (other ?: 0)
 
 /**
- * Adds the two numbers together (e.g.: `a + b`) if at least one input is non-null (substituting 0 for the
- * other input if it is null), or null if both inputs are null.
+ * Adds the two numbers together (`a + b`) if at least one input is non-null (substituting 0 for the
+ * other input if it is null), or returning null if both inputs are null.
  *
  * @receiver some nullable number
  * @param other another nullable number
@@ -32,8 +32,8 @@ operator fun Int?.plus(other: Int?) = if (allNull(this, other)) null else (this 
 operator fun Long?.plus(other: Long?) = if (allNull(this, other)) null else (this ?: 0L) + (other ?: 0L)
 
 /**
- * Adds the two numbers together (e.g.: `a + b`) if at least one input is non-null (substituting 0 for the
- * other input if it is null), or null if both inputs are null.
+ * Adds the two numbers together (`a + b`) if at least one input is non-null (substituting 0 for the
+ * other input if it is null), or returning null if both inputs are null.
  *
  * @receiver some nullable number
  * @param other another nullable number
@@ -42,8 +42,8 @@ operator fun Long?.plus(other: Long?) = if (allNull(this, other)) null else (thi
 operator fun Short?.plus(other: Short?) = if (allNull(this, other)) null else ((this ?: 0) + (other ?: 0)).toShort()
 
 /**
- * Adds the two numbers together (e.g.: `a + b`) if at least one input is non-null (substituting 0 for the
- * other input if it is null), or null if both inputs are null.
+ * Adds the two numbers together (`a + b`) if at least one input is non-null (substituting 0 for the
+ * other input if it is null), or returning null if both inputs are null.
  *
  * @receiver some nullable number
  * @param other another nullable number
@@ -52,8 +52,8 @@ operator fun Short?.plus(other: Short?) = if (allNull(this, other)) null else ((
 operator fun Float?.plus(other: Float?) = if (allNull(this, other)) null else (this ?: 0F) + (other ?: 0F)
 
 /**
- * Adds the two numbers together (e.g.: `a + b`) if at least one input is non-null (substituting 0 for the
- * other input if it is null), or null if both inputs are null.
+ * Adds the two numbers together (`a + b`) if at least one input is non-null (substituting 0 for the
+ * other input if it is null), or returning null if both inputs are null.
  *
  * @receiver some nullable number
  * @param other another nullable number
@@ -62,18 +62,18 @@ operator fun Float?.plus(other: Float?) = if (allNull(this, other)) null else (t
 operator fun Double?.plus(other: Double?) = if (allNull(this, other)) null else (this ?: 0.0) + (other ?: 0.0)
 
 /**
- * Adds the two objects together (e.g.: `a * b`) using [Addable.plus] if both inputs are non-null.
- * If one input is null, the other input is returned; if both are null, null is returned.
+ * Adds the two objects together (`a + b`) using [Addable.plus] if both inputs are non-null; if either input is null,
+ * the other input is returned.
  *
  * @receiver some nullable object
  * @param other another nullable object
- * @return the sum as described
+ * @return the sum as described, or null if both inputs are null
  * @param <T> the type of objects being subtracted
  */
 operator fun <T : Addable<T>> T?.plus(other: T?) = this.op(other) { x, y -> x + y }
 
 /**
- * Subtracts the second number from the first (e.g.: `a - b`) if at least one input is non-null (substituting
+ * Subtracts the second number from the first (`a - b`) if at least one input is non-null (substituting
  * 0 for the other input if it is null), or null if both inputs are null.
  *
  * @receiver some nullable number
@@ -83,7 +83,7 @@ operator fun <T : Addable<T>> T?.plus(other: T?) = this.op(other) { x, y -> x + 
 operator fun Int?.minus(other: Int?) = if (allNull(this, other)) null else (this ?: 0) - (other ?: 0)
 
 /**
- * Subtracts the second number from the first (e.g.: `a - b`) if at least one input is non-null (substituting
+ * Subtracts the second number from the first (`a - b`) if at least one input is non-null (substituting
  * 0 for the other input if it is null), or null if both inputs are null.
  *
  * @receiver some nullable number
@@ -93,7 +93,7 @@ operator fun Int?.minus(other: Int?) = if (allNull(this, other)) null else (this
 operator fun Long?.minus(other: Long?) = if (allNull(this, other)) null else (this ?: 0L) - (other ?: 0L)
 
 /**
- * Subtracts the second number from the first (e.g.: `a - b`) if at least one input is non-null (substituting
+ * Subtracts the second number from the first (`a - b`) if at least one input is non-null (substituting
  * 0 for the other input if it is null), or null if both inputs are null.
  *
  * @receiver some nullable number
@@ -103,7 +103,7 @@ operator fun Long?.minus(other: Long?) = if (allNull(this, other)) null else (th
 operator fun Short?.minus(other: Short?) = if (allNull(this, other)) null else ((this ?: 0) - (other ?: 0)).toShort()
 
 /**
- * Subtracts the second number from the first (e.g.: `a - b`) if at least one input is non-null (substituting
+ * Subtracts the second number from the first (`a - b`) if at least one input is non-null (substituting
  * 0 for the other input if it is null), or null if both inputs are null.
  *
  * @receiver some nullable number
@@ -113,7 +113,7 @@ operator fun Short?.minus(other: Short?) = if (allNull(this, other)) null else (
 operator fun Float?.minus(other: Float?) = if (allNull(this, other)) null else (this ?: 0F) - (other ?: 0F)
 
 /**
- * Subtracts the second number from the first (e.g.: `a - b`) if at least one input is non-null (substituting
+ * Subtracts the second number from the first (`a - b`) if at least one input is non-null (substituting
  * 0 for the other input if it is null), or null if both inputs are null.
  *
  * @receiver some nullable number
@@ -123,18 +123,18 @@ operator fun Float?.minus(other: Float?) = if (allNull(this, other)) null else (
 operator fun Double?.minus(other: Double?) = if (allNull(this, other)) null else (this ?: 0.0) - (other ?: 0.0)
 
 /**
- * Subtracts the second object from the first (e.g.: `a - b`) using [Subtractable.minus] if both
- * inputs are non-null.  If one input is null, the other input is returned; if both are null, null is returned.
+ * Subtracts the second object from the first (`a - b`) using [Subtractable.minus] if both inputs are non-null; if
+ * either input is null, the other input is returned.
  *
  * @receiver some nullable object
  * @param other another nullable object
- * @return the difference as described
+ * @return the difference as described, or null if both inputs are null
  * @param <T> the type of objects being subtracted
 </T> */
 operator fun <T : Subtractable<T>> T?.minus(other: T?) = this.op(other) { x, y -> x - y }
 
 /**
- * Multiplies the two numbers together (e.g.: `a * b`) if at least one input is non-null (substituting 1 for
+ * Multiplies the two numbers together (`a * b`) if at least one input is non-null (substituting 1 for
  * the other input if it is null), or null if both inputs are null.
  *
  * @receiver some nullable number
@@ -144,7 +144,7 @@ operator fun <T : Subtractable<T>> T?.minus(other: T?) = this.op(other) { x, y -
 operator fun Int?.times(other: Int?) = if (allNull(this, other)) null else (this ?: 1) * (other ?: 1)
 
 /**
- * Multiplies the two numbers together (e.g.: `a * b`) if at least one input is non-null (substituting 1 for
+ * Multiplies the two numbers together (`a * b`) if at least one input is non-null (substituting 1 for
  * the other input if it is null), or null if both inputs are null.
  *
  * @receiver some nullable number
@@ -154,7 +154,7 @@ operator fun Int?.times(other: Int?) = if (allNull(this, other)) null else (this
 operator fun Long?.times(other: Long?) = if (allNull(this, other)) null else (this ?: 1L) * (other ?: 1L)
 
 /**
- * Multiplies the two numbers together (e.g.: `a * b`) if at least one input is non-null (substituting 1 for
+ * Multiplies the two numbers together (`a * b`) if at least one input is non-null (substituting 1 for
  * the other input if it is null), or null if both inputs are null.
  *
  * @receiver some nullable number
@@ -164,7 +164,7 @@ operator fun Long?.times(other: Long?) = if (allNull(this, other)) null else (th
 operator fun Short?.times(other: Short?) = if (allNull(this, other)) null else ((this ?: 1) * (other ?: 1)).toShort()
 
 /**
- * Multiplies the two numbers together (e.g.: `a * b`) if at least one input is non-null (substituting 1 for
+ * Multiplies the two numbers together (`a * b`) if at least one input is non-null (substituting 1 for
  * the other input if it is null), or null if both inputs are null.
  *
  * @receiver some nullable number
@@ -174,7 +174,7 @@ operator fun Short?.times(other: Short?) = if (allNull(this, other)) null else (
 operator fun Float?.times(other: Float?) = if (allNull(this, other)) null else (this ?: 1F) * (other ?: 1F)
 
 /**
- * Multiplies the two numbers together (e.g.: `a * b`) if at least one input is non-null (substituting 1 for
+ * Multiplies the two numbers together (`a * b`) if at least one input is non-null (substituting 1 for
  * the other input if it is null), or null if both inputs are null.
  *
  * @receiver some nullable number
@@ -184,73 +184,73 @@ operator fun Float?.times(other: Float?) = if (allNull(this, other)) null else (
 operator fun Double?.times(other: Double?) = if (allNull(this, other)) null else (this ?: 1.0) * (other ?: 1.0)
 
 /**
- * Multiplies the two objects together (e.g.: `a * b`) using [Multipliable.times] if both inputs are
- * non-null.  If one input is null, the other input is returned; if both are null, null is returned.
+ * Multiplies the two objects together (`a * b`) using [Multipliable.times] if both inputs are non-null; if either input
+ * is null, the other input is returned.
  *
  * @receiver some nullable object
  * @param other another nullable object
- * @return the product as described
+ * @return the product as described, or null if both inputs are null
  * @param <T> the type of objects being multiplied
  */
 operator fun <T : Multipliable<T>> T?.times(other: T?) = this.op(other) { x, y -> x * y }
 
 /**
- * Divides the second number from the first (e.g.: `a / b`) if at least one input is non-null (substituting
+ * Divides the second number from the first (`a / b`) if at least one input is non-null (substituting
  * 1 for the other input if it is null), or null if both inputs are null.
  *
  * @receiver some nullable number
  * @param other another nullable number
- * @return the difference as described
+ * @return the quotient as described
  */
 operator fun Int?.div(other: Int?) = if (allNull(this, other)) null else (this ?: 1) / (other ?: 1)
 
 /**
- * Divides the second number from the first (e.g.: `a / b`) if at least one input is non-null (substituting
+ * Divides the second number from the first (`a / b`) if at least one input is non-null (substituting
  * 1 for the other input if it is null), or null if both inputs are null.
  *
  * @receiver some nullable number
  * @param other another nullable number
- * @return the difference as described
+ * @return the quotient as described
  */
 operator fun Long?.div(other: Long?) = if (allNull(this, other)) null else (this ?: 1L) / (other ?: 1L)
 
 /**
- * Divides the second number from the first (e.g.: `a / b`) if at least one input is non-null (substituting
+ * Divides the second number from the first (`a / b`) if at least one input is non-null (substituting
  * 1 for the other input if it is null), or null if both inputs are null.
  *
  * @receiver some nullable number
  * @param other another nullable number
- * @return the difference as described
+ * @return the quotient as described
  */
 operator fun Short?.div(other: Short?) = if (allNull(this, other)) null else ((this ?: 1) / (other ?: 1)).toShort()
 
 /**
- * Divides the second number from the first (e.g.: `a / b`) if at least one input is non-null (substituting
+ * Divides the second number from the first (`a / b`) if at least one input is non-null (substituting
  * 1 for the other input if it is null), or null if both inputs are null.
  *
  * @receiver some nullable number
  * @param other another nullable number
- * @return the difference as described
+ * @return the quotient as described
  */
 operator fun Float?.div(other: Float?) = if (allNull(this, other)) null else (this ?: 1F) / (other ?: 1F)
 
 /**
- * Divides the second number from the first (e.g.: `a / b`) if at least one input is non-null (substituting
+ * Divides the second number from the first (`a / b`) if at least one input is non-null (substituting
  * 1 for the other input if it is null), or null if both inputs are null.
  *
  * @receiver some nullable number
  * @param other another nullable number
- * @return the difference as described
+ * @return the quotient as described
  */
 operator fun Double?.div(other: Double?) = if (allNull(this, other)) null else (this ?: 1.0) / (other ?: 1.0)
 
 /**
- * Divides the second object from the first (e.g.: `a / b`) using [Dividable.div] if both inputs
- * are non-null.  If one input is null, the other input is returned; if both are null, null is returned.
+ * Divides the second object from the first (`a / b`) using [Dividable.div] if both inputs are non-null; if either input
+ * is null, the other input is returned.
  *
  * @receiver some nullable object
  * @param other another nullable object
- * @return the product as described
+ * @return the quotient as described, or null if both inputs are null
  * @param <T> the type of objects being divided
  */
 operator fun <T : Dividable<T>> T?.div(other: T?) = op(other) { x, y -> x / y }
