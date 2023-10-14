@@ -13,14 +13,14 @@ import org.junit.jupiter.params.provider.CsvSource
 import java.util.stream.Stream
 
 /**
- * Unit tests for Ops.kt.
+ * Unit tests for `Extensions.kt`.
  */
-class OpsTest {
+class ExtensionsTest {
 
     companion object {
-        private const val delta = 0.001
+        private const val DELTA = 0.001
         private val doubleEquals = fun(x: Double?, y: Double?): Boolean =
-            if (x == null || y == null) x == null && y == null else (x / y) - 1.0 <= delta
+            if (x == null || y == null) x == null && y == null else (x / y) - 1.0 <= DELTA
 
         private val data1 = MyData("key1", 2.0)
         private val data2 = MyData("key2", 3.0)
@@ -90,7 +90,7 @@ class OpsTest {
             // THEN it should return the expected result.
             when (expectedResult) {
                 null -> assertThat(result).isNull()
-                else -> assertThat(result).isEqualTo(expectedResult, within(delta))
+                else -> assertThat(result).isEqualTo(expectedResult, within(DELTA))
             }
         }
 
@@ -159,7 +159,7 @@ class OpsTest {
             // THEN it should return the expected result.
             when (expectedResult) {
                 null -> assertThat(result).isNull()
-                else -> assertThat(result).isEqualTo(expectedResult, within(delta.toFloat()))
+                else -> assertThat(result).isEqualTo(expectedResult, within(DELTA.toFloat()))
             }
         }
 
@@ -173,7 +173,7 @@ class OpsTest {
             // THEN it should return the expected result.
             when (expectedResult) {
                 null -> assertThat(result).isNull()
-                else -> assertThat(result).isEqualTo(expectedResult, within(delta))
+                else -> assertThat(result).isEqualTo(expectedResult, within(DELTA))
             }
         }
 
@@ -242,7 +242,7 @@ class OpsTest {
             // THEN it should return the expected result.
             when (expectedResult) {
                 null -> assertThat(result).isNull()
-                else -> assertThat(result).isEqualTo(expectedResult, within(delta.toFloat()))
+                else -> assertThat(result).isEqualTo(expectedResult, within(DELTA.toFloat()))
             }
         }
 
@@ -256,7 +256,7 @@ class OpsTest {
             // THEN it should return the expected result.
             when (expectedResult) {
                 null -> assertThat(result).isNull()
-                else -> assertThat(result).isEqualTo(expectedResult, within(delta))
+                else -> assertThat(result).isEqualTo(expectedResult, within(DELTA))
             }
         }
 
@@ -325,7 +325,7 @@ class OpsTest {
             // THEN it should return the expected result.
             when (expectedResult) {
                 null -> assertThat(result).isNull()
-                else -> assertThat(result).isEqualTo(expectedResult, within(delta.toFloat()))
+                else -> assertThat(result).isEqualTo(expectedResult, within(DELTA.toFloat()))
             }
         }
 
@@ -339,7 +339,7 @@ class OpsTest {
             // THEN it should return the expected result.
             when (expectedResult) {
                 null -> assertThat(result).isNull()
-                else -> assertThat(result).isEqualTo(expectedResult, within(delta))
+                else -> assertThat(result).isEqualTo(expectedResult, within(DELTA))
             }
         }
 
@@ -408,7 +408,7 @@ class OpsTest {
             // THEN it should return the expected result.
             when (expectedResult) {
                 null -> assertThat(result).isNull()
-                else -> assertThat(result).isEqualTo(expectedResult, within(delta.toFloat()))
+                else -> assertThat(result).isEqualTo(expectedResult, within(DELTA.toFloat()))
             }
         }
 
@@ -422,7 +422,7 @@ class OpsTest {
             // THEN it should return the expected result.
             when (expectedResult) {
                 null -> assertThat(result).isNull()
-                else -> assertThat(result).isEqualTo(expectedResult, within(delta))
+                else -> assertThat(result).isEqualTo(expectedResult, within(DELTA))
             }
         }
 
@@ -446,5 +446,39 @@ class OpsTest {
             Arguments.of(data2, null, data2),
             Arguments.of(null, 1.0, null),
             Arguments.of(data2, 1.5, MyData("key2", 4.5)))
+    }
+
+    @Nested
+    inner class OpTest {
+
+        @ParameterizedTest
+        @ArgumentsSource(AddObjectArgProvider::class)
+        fun shouldOpNullableObject(a: MyData?, b: MyData?, expectedResult: MyData?) {
+            // GIVEN two nullable objects `a` and `b`.
+            // WHEN a.op(b) is called...
+            val result = a.op(b) { x, y -> x + y }
+
+            // THEN it should return the expected result.
+            assertThat(result).usingRecursiveComparison()
+                .withEqualsForType(doubleEquals, Double::class.java)
+                .isEqualTo(expectedResult)
+        }
+    }
+
+    @Nested
+    inner class ApplyTest {
+
+        @ParameterizedTest
+        @ArgumentsSource(ScalableObjectArgProvider::class)
+        fun shouldOpNullableObject(a: MyData?, factor: Double?, expectedResult: MyData?) {
+            // GIVEN a nullable object `obj` and a factor.
+            // WHEN a.apply(b) is called...
+            val result = a.apply(factor) { x, y -> x.scale(y) }
+
+            // THEN it should return the expected result.
+            assertThat(result).usingRecursiveComparison()
+                .withEqualsForType(doubleEquals, Double::class.java)
+                .isEqualTo(expectedResult)
+        }
     }
 }

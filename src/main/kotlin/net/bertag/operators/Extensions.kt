@@ -1,15 +1,12 @@
-@file:JvmName("Ops")
 package net.bertag.operators
 
 import net.bertag.operators.api.Addable
-import net.bertag.operators.api.Dividable
-import net.bertag.operators.api.Multipliable
-import net.bertag.operators.api.Scalable
 import net.bertag.operators.api.Subtractable
+import net.bertag.operators.api.Multipliable
+import net.bertag.operators.api.Dividable
+import net.bertag.operators.api.Scalable
 import java.util.function.BiFunction
 import java.util.function.BinaryOperator
-import kotlin.math.roundToInt
-import kotlin.math.roundToLong
 
 /**
  * Adds the two numbers together (`a + b`) if at least one input is non-null (substituting 0 for the
@@ -19,7 +16,7 @@ import kotlin.math.roundToLong
  * @param other another nullable number
  * @return the sum as described
  */
-operator fun Int?.plus(other: Int?) = if (allNull(this, other)) null else (this ?: 0) + (other ?: 0)
+operator fun Int?.plus(other: Int?) = Ops.plus(this, other)
 
 /**
  * Adds the two numbers together (`a + b`) if at least one input is non-null (substituting 0 for the
@@ -29,7 +26,7 @@ operator fun Int?.plus(other: Int?) = if (allNull(this, other)) null else (this 
  * @param other another nullable number
  * @return the sum as described
  */
-operator fun Long?.plus(other: Long?) = if (allNull(this, other)) null else (this ?: 0L) + (other ?: 0L)
+operator fun Long?.plus(other: Long?) = Ops.plus(this, other)
 
 /**
  * Adds the two numbers together (`a + b`) if at least one input is non-null (substituting 0 for the
@@ -39,7 +36,7 @@ operator fun Long?.plus(other: Long?) = if (allNull(this, other)) null else (thi
  * @param other another nullable number
  * @return the sum as described
  */
-operator fun Short?.plus(other: Short?) = if (allNull(this, other)) null else ((this ?: 0) + (other ?: 0)).toShort()
+operator fun Short?.plus(other: Short?) = Ops.plus(this, other)
 
 /**
  * Adds the two numbers together (`a + b`) if at least one input is non-null (substituting 0 for the
@@ -49,7 +46,7 @@ operator fun Short?.plus(other: Short?) = if (allNull(this, other)) null else ((
  * @param other another nullable number
  * @return the sum as described
  */
-operator fun Float?.plus(other: Float?) = if (allNull(this, other)) null else (this ?: 0F) + (other ?: 0F)
+operator fun Float?.plus(other: Float?) = Ops.plus(this, other)
 
 /**
  * Adds the two numbers together (`a + b`) if at least one input is non-null (substituting 0 for the
@@ -59,7 +56,7 @@ operator fun Float?.plus(other: Float?) = if (allNull(this, other)) null else (t
  * @param other another nullable number
  * @return the sum as described
  */
-operator fun Double?.plus(other: Double?) = if (allNull(this, other)) null else (this ?: 0.0) + (other ?: 0.0)
+operator fun Double?.plus(other: Double?) = Ops.plus(this, other)
 
 /**
  * Adds the two objects together (`a + b`) using [Addable.plus] if both inputs are non-null; if either input is null,
@@ -68,9 +65,9 @@ operator fun Double?.plus(other: Double?) = if (allNull(this, other)) null else 
  * @receiver some nullable object
  * @param other another nullable object
  * @return the sum as described, or null if both inputs are null
- * @param <T> the type of objects being subtracted
+ * @param <T> the type of objects being added
  */
-operator fun <T : Addable<T>> T?.plus(other: T?) = this.op(other) { x, y -> x + y }
+operator fun <T : Addable<T>> T?.plus(other: T?) = Ops.plus(this, other)
 
 /**
  * Subtracts the second number from the first (`a - b`) if at least one input is non-null (substituting
@@ -80,7 +77,7 @@ operator fun <T : Addable<T>> T?.plus(other: T?) = this.op(other) { x, y -> x + 
  * @param other another nullable number
  * @return the difference as described
  */
-operator fun Int?.minus(other: Int?) = if (allNull(this, other)) null else (this ?: 0) - (other ?: 0)
+operator fun Int?.minus(other: Int?) = Ops.minus(this, other)
 
 /**
  * Subtracts the second number from the first (`a - b`) if at least one input is non-null (substituting
@@ -90,7 +87,7 @@ operator fun Int?.minus(other: Int?) = if (allNull(this, other)) null else (this
  * @param other another nullable number
  * @return the difference as described
  */
-operator fun Long?.minus(other: Long?) = if (allNull(this, other)) null else (this ?: 0L) - (other ?: 0L)
+operator fun Long?.minus(other: Long?) = Ops.minus(this, other)
 
 /**
  * Subtracts the second number from the first (`a - b`) if at least one input is non-null (substituting
@@ -100,7 +97,7 @@ operator fun Long?.minus(other: Long?) = if (allNull(this, other)) null else (th
  * @param other another nullable number
  * @return the difference as described
  */
-operator fun Short?.minus(other: Short?) = if (allNull(this, other)) null else ((this ?: 0) - (other ?: 0)).toShort()
+operator fun Short?.minus(other: Short?) = Ops.minus(this, other)
 
 /**
  * Subtracts the second number from the first (`a - b`) if at least one input is non-null (substituting
@@ -110,7 +107,7 @@ operator fun Short?.minus(other: Short?) = if (allNull(this, other)) null else (
  * @param other another nullable number
  * @return the difference as described
  */
-operator fun Float?.minus(other: Float?) = if (allNull(this, other)) null else (this ?: 0F) - (other ?: 0F)
+operator fun Float?.minus(other: Float?) = Ops.minus(this, other)
 
 /**
  * Subtracts the second number from the first (`a - b`) if at least one input is non-null (substituting
@@ -120,7 +117,7 @@ operator fun Float?.minus(other: Float?) = if (allNull(this, other)) null else (
  * @param other another nullable number
  * @return the difference as described
  */
-operator fun Double?.minus(other: Double?) = if (allNull(this, other)) null else (this ?: 0.0) - (other ?: 0.0)
+operator fun Double?.minus(other: Double?) = Ops.minus(this, other)
 
 /**
  * Subtracts the second object from the first (`a - b`) using [Subtractable.minus] if both inputs are non-null; if
@@ -130,8 +127,8 @@ operator fun Double?.minus(other: Double?) = if (allNull(this, other)) null else
  * @param other another nullable object
  * @return the difference as described, or null if both inputs are null
  * @param <T> the type of objects being subtracted
-</T> */
-operator fun <T : Subtractable<T>> T?.minus(other: T?) = this.op(other) { x, y -> x - y }
+ */
+operator fun <T : Subtractable<T>> T?.minus(other: T?) = Ops.minus(this, other)
 
 /**
  * Multiplies the two numbers together (`a * b`) if at least one input is non-null (substituting 1 for
@@ -141,7 +138,7 @@ operator fun <T : Subtractable<T>> T?.minus(other: T?) = this.op(other) { x, y -
  * @param other another nullable number
  * @return the product as described
  */
-operator fun Int?.times(other: Int?) = if (allNull(this, other)) null else (this ?: 1) * (other ?: 1)
+operator fun Int?.times(other: Int?) = Ops.times(this, other)
 
 /**
  * Multiplies the two numbers together (`a * b`) if at least one input is non-null (substituting 1 for
@@ -151,7 +148,7 @@ operator fun Int?.times(other: Int?) = if (allNull(this, other)) null else (this
  * @param other another nullable number
  * @return the product as described
  */
-operator fun Long?.times(other: Long?) = if (allNull(this, other)) null else (this ?: 1L) * (other ?: 1L)
+operator fun Long?.times(other: Long?) = Ops.times(this, other)
 
 /**
  * Multiplies the two numbers together (`a * b`) if at least one input is non-null (substituting 1 for
@@ -161,7 +158,7 @@ operator fun Long?.times(other: Long?) = if (allNull(this, other)) null else (th
  * @param other another nullable number
  * @return the product as described
  */
-operator fun Short?.times(other: Short?) = if (allNull(this, other)) null else ((this ?: 1) * (other ?: 1)).toShort()
+operator fun Short?.times(other: Short?) = Ops.times(this, other)
 
 /**
  * Multiplies the two numbers together (`a * b`) if at least one input is non-null (substituting 1 for
@@ -171,7 +168,7 @@ operator fun Short?.times(other: Short?) = if (allNull(this, other)) null else (
  * @param other another nullable number
  * @return the product as described
  */
-operator fun Float?.times(other: Float?) = if (allNull(this, other)) null else (this ?: 1F) * (other ?: 1F)
+operator fun Float?.times(other: Float?) = Ops.times(this, other)
 
 /**
  * Multiplies the two numbers together (`a * b`) if at least one input is non-null (substituting 1 for
@@ -181,7 +178,7 @@ operator fun Float?.times(other: Float?) = if (allNull(this, other)) null else (
  * @param other another nullable number
  * @return the product as described
  */
-operator fun Double?.times(other: Double?) = if (allNull(this, other)) null else (this ?: 1.0) * (other ?: 1.0)
+operator fun Double?.times(other: Double?) = Ops.times(this, other)
 
 /**
  * Multiplies the two objects together (`a * b`) using [Multipliable.times] if both inputs are non-null; if either input
@@ -192,7 +189,7 @@ operator fun Double?.times(other: Double?) = if (allNull(this, other)) null else
  * @return the product as described, or null if both inputs are null
  * @param <T> the type of objects being multiplied
  */
-operator fun <T : Multipliable<T>> T?.times(other: T?) = this.op(other) { x, y -> x * y }
+operator fun <T : Multipliable<T>> T?.times(other: T?) = Ops.times(this, other)
 
 /**
  * Divides the second number from the first (`a / b`) if at least one input is non-null (substituting
@@ -202,7 +199,7 @@ operator fun <T : Multipliable<T>> T?.times(other: T?) = this.op(other) { x, y -
  * @param other another nullable number
  * @return the quotient as described
  */
-operator fun Int?.div(other: Int?) = if (allNull(this, other)) null else (this ?: 1) / (other ?: 1)
+operator fun Int?.div(other: Int?) = Ops.div(this, other)
 
 /**
  * Divides the second number from the first (`a / b`) if at least one input is non-null (substituting
@@ -212,7 +209,7 @@ operator fun Int?.div(other: Int?) = if (allNull(this, other)) null else (this ?
  * @param other another nullable number
  * @return the quotient as described
  */
-operator fun Long?.div(other: Long?) = if (allNull(this, other)) null else (this ?: 1L) / (other ?: 1L)
+operator fun Long?.div(other: Long?) = Ops.div(this, other)
 
 /**
  * Divides the second number from the first (`a / b`) if at least one input is non-null (substituting
@@ -222,7 +219,7 @@ operator fun Long?.div(other: Long?) = if (allNull(this, other)) null else (this
  * @param other another nullable number
  * @return the quotient as described
  */
-operator fun Short?.div(other: Short?) = if (allNull(this, other)) null else ((this ?: 1) / (other ?: 1)).toShort()
+operator fun Short?.div(other: Short?) = Ops.div(this, other)
 
 /**
  * Divides the second number from the first (`a / b`) if at least one input is non-null (substituting
@@ -232,7 +229,7 @@ operator fun Short?.div(other: Short?) = if (allNull(this, other)) null else ((t
  * @param other another nullable number
  * @return the quotient as described
  */
-operator fun Float?.div(other: Float?) = if (allNull(this, other)) null else (this ?: 1F) / (other ?: 1F)
+operator fun Float?.div(other: Float?) = Ops.div(this, other)
 
 /**
  * Divides the second number from the first (`a / b`) if at least one input is non-null (substituting
@@ -242,7 +239,7 @@ operator fun Float?.div(other: Float?) = if (allNull(this, other)) null else (th
  * @param other another nullable number
  * @return the quotient as described
  */
-operator fun Double?.div(other: Double?) = if (allNull(this, other)) null else (this ?: 1.0) / (other ?: 1.0)
+operator fun Double?.div(other: Double?) = Ops.div(this, other)
 
 /**
  * Divides the second object from the first (`a / b`) using [Dividable.div] if both inputs are non-null; if either input
@@ -253,7 +250,7 @@ operator fun Double?.div(other: Double?) = if (allNull(this, other)) null else (
  * @return the quotient as described, or null if both inputs are null
  * @param <T> the type of objects being divided
  */
-operator fun <T : Dividable<T>> T?.div(other: T?) = op(other) { x, y -> x / y }
+operator fun <T : Dividable<T>> T?.div(other: T?) = Ops.div(this, other)
 
 /**
  * Scales a number by a given factor if both are non-null.  If the receiver (Kotlin) — or first argument (Java) — is
@@ -263,7 +260,7 @@ operator fun <T : Dividable<T>> T?.div(other: T?) = op(other) { x, y -> x / y }
  * @param factor a nullable factor
  * @return the scaled result as described, rounded to the nearest integer
  */
-fun Int?.scale(factor: Double?) = if (this == null) null else (this * (factor ?: 1.0)).roundToInt()
+fun Int?.scale(factor: Double?) = Ops.scale(this, factor)
 
 /**
  * Scales a number by a given factor if both are non-null.  If the receiver (Kotlin) — or first argument (Java) — is
@@ -273,7 +270,7 @@ fun Int?.scale(factor: Double?) = if (this == null) null else (this * (factor ?:
  * @param factor a nullable factor
  * @return the scaled result as described, rounded to the nearest (long) integer
  */
-fun Long?.scale(factor: Double?) = if (this == null) null else (this * (factor ?: 1.0)).roundToLong()
+fun Long?.scale(factor: Double?) = Ops.scale(this, factor)
 
 /**
  * Scales a number by a given factor if both are non-null.  If the receiver (Kotlin) — or first argument (Java) — is
@@ -283,7 +280,7 @@ fun Long?.scale(factor: Double?) = if (this == null) null else (this * (factor ?
  * @param factor a nullable factor
  * @return the scaled result as described, rounded to the nearest (short) integer
  */
-fun Short?.scale(factor: Double?) = if (this == null) null else (this * (factor ?: 1.0)).roundToInt().toShort()
+fun Short?.scale(factor: Double?) = Ops.scale(this, factor)
 
 /**
  * Scales a number by a given factor if both are non-null.  If the receiver (Kotlin) — or first argument (Java) — is
@@ -293,7 +290,7 @@ fun Short?.scale(factor: Double?) = if (this == null) null else (this * (factor 
  * @param factor a nullable factor
  * @return the scaled result as described
  */
-fun Float?.scale(factor: Double?) = if (this == null) null else (this * (factor ?: 1.0)).toFloat()
+fun Float?.scale(factor: Double?) = Ops.scale(this, factor)
 
 /**
  * Scales a number by a given factor if both are non-null.  If the receiver (Kotlin) — or first argument (Java) — is
@@ -303,7 +300,7 @@ fun Float?.scale(factor: Double?) = if (this == null) null else (this * (factor 
  * @param factor a nullable factor
  * @return the scaled result as described
  */
-fun Double?.scale(factor: Double?) = if (this == null) null else (this * (factor ?: 1.0))
+fun Double?.scale(factor: Double?) = Ops.scale(this, factor)
 
 /**
  * Scales a [Scalable] object by a given factor if both are non-null.  If the receiver (Kotlin) — or first argument
@@ -313,7 +310,7 @@ fun Double?.scale(factor: Double?) = if (this == null) null else (this * (factor
  * @param factor a nullable factor
  * @return the scaled result as described
  */
-fun <T : Scalable<T>> T?.scale(factor: Double?): T? = this.apply(factor) { x, y -> x.scale(y) }
+fun <T : Scalable<T>> T?.scale(factor: Double?): T? = Ops.scale(this, factor)
 
 /**
  * Performs the given operation on the given inputs if they are both non-null.  If one input is null, the other input is
@@ -325,11 +322,7 @@ fun <T : Scalable<T>> T?.scale(factor: Double?): T? = this.apply(factor) { x, y 
  * @return the result as described
  * @param <T> the type of objects being operated upon
  */
-fun <T> T?.op(other: T?, opFunction: BinaryOperator<T>): T? {
-    return if (this == null) other
-    else if (other == null) this
-    else opFunction.apply(this, other)
-}
+fun <T> T?.op(other: T?, opFunction: BinaryOperator<T>): T? = Ops.op(this, other, opFunction)
 
 /**
  * Applies the given transformation to an object if the other input is non-null.  If the receiver (Kotlin) — or first
@@ -341,17 +334,4 @@ fun <T> T?.op(other: T?, opFunction: BinaryOperator<T>): T? {
  * @return the result as described
  * @param <T> the type of objects being operated upon
  */
-fun <T, U> T?.apply(other: U?, opFunction: BiFunction<T, U, T>): T? {
-    return if (this == null) null
-    else if (other == null) this
-    else opFunction.apply(this, other)
-}
-
-/**
- * Determines if both objects are null.
- *
- * @param a some nullable object
- * @param b another nullable object
- * @return true if both objects are null; false if either or both is non-null
- */
-private fun allNull(a: Any?, b: Any?) = (a == null && b == null)
+fun <T, U> T?.apply(other: U?, opFunction: BiFunction<T, U, T>): T? = Ops.apply(this, other, opFunction)

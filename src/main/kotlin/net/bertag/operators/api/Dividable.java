@@ -1,4 +1,4 @@
-package net.bertag.operators.api
+package net.bertag.operators.api;
 
 /**
  * Contract for dividing one objects by another (`this / other`). Implementations should take care to
@@ -6,7 +6,7 @@ package net.bertag.operators.api
  *
  * @param <T> the type of implementation
  */
-interface Dividable<T> {
+public interface Dividable<T> {
 
     /**
      * Divides this object by the other one, returning a result of the same type.
@@ -14,5 +14,5 @@ interface Dividable<T> {
      * @param other another object
      * @return the result; may be `this` or a new instance depending on the implementation
      */
-    operator fun div(other: T): T
+    T div(T other);
 }
