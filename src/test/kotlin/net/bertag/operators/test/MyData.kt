@@ -1,10 +1,10 @@
 package net.bertag.operators.test
 
 import net.bertag.operators.api.Addable
-import net.bertag.operators.api.Subtractable
-import net.bertag.operators.api.Multipliable
 import net.bertag.operators.api.Dividable
+import net.bertag.operators.api.Multipliable
 import net.bertag.operators.api.Scalable
+import net.bertag.operators.api.Subtractable
 import net.bertag.operators.div
 import net.bertag.operators.minus
 import net.bertag.operators.plus

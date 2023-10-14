@@ -1,6 +1,10 @@
 package net.bertag.operators;
 
-import net.bertag.operators.api.*;
+import net.bertag.operators.api.Addable;
+import net.bertag.operators.api.Dividable;
+import net.bertag.operators.api.Multipliable;
+import net.bertag.operators.api.Scalable;
+import net.bertag.operators.api.Subtractable;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.checkerframework.framework.qual.DefaultQualifier;
