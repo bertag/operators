@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>net.bertag</groupId>
+		<artifactId>operators-parent</artifactId>
+		<version>1.1.0</version>
+	</parent>
+	<artifactId>operators-example-kotlin</artifactId>
+	<version>${parent.version}</version>
+	<name>operators-example-kotlin</name>
+	<description>Examples showing Operators usage in Kotlin.</description>
+	<url>https://github.com/bertag/operators</url>
+
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>https://opensource.org/licenses/MIT</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<developers>
+		<developer>
+			<name>Scott Bertagnole</name>
+			<url>https://github.com/bertag</url>
+		</developer>
+	</developers>
+	<scm>
+		<connection>scm:git:git://github.com/bertag/operators.git</connection>
+		<developerConnection>scm:git:ssh://github.com/bertag/operators.git</developerConnection>
+		<url>https://github.com/bertag/operators</url>
+	</scm>
+	<issueManagement>
+		<url>https://github.com/bertag/operators/issues</url>
+	</issueManagement>
+
+	<properties>
+		<maven.compiler.source>1.17</maven.compiler.source>
+		<maven.compiler.target>1.17</maven.compiler.target>
+		<kotlin.code.style>official</kotlin.code.style>
+		<kotlin.version>1.8.0</kotlin.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>net.bertag</groupId>
+			<artifactId>operators</artifactId>
+			<version>${parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jetbrains.kotlin</groupId>
+			<artifactId>kotlin-stdlib</artifactId>
+			<version>${kotlin.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<sourceDirectory>src/main/kotlin</sourceDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.jetbrains.kotlin</groupId>
+				<artifactId>kotlin-maven-plugin</artifactId>
+				<version>${kotlin.version}</version>
+				<executions>
+					<execution>
+						<id>compile</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
