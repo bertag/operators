@@ -5,21 +5,14 @@ import net.bertag.operators.api.Dividable;
 import net.bertag.operators.api.Multipliable;
 import net.bertag.operators.api.Scalable;
 import net.bertag.operators.api.Subtractable;
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
-import org.checkerframework.framework.qual.DefaultQualifier;
 
 import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 
-import static org.checkerframework.framework.qual.TypeUseLocation.PARAMETER;
-import static org.checkerframework.framework.qual.TypeUseLocation.RETURN;
-
 /**
  * Utility class defining null-safe transformation operations.
  */
-@DefaultQualifier(value = NonNull.class, locations = {PARAMETER, RETURN})
 public class Ops {
 
     /**
@@ -28,10 +21,9 @@ public class Ops {
      *
      * @param a some nullable number
      * @param b another nullable number
-     * @return the sum as described
+     * @return the sum as described, or null if both inputs are null
      */
-    @Nullable
-    public static Integer plus(@Nullable Integer a, @Nullable Integer b) {
+    public static Integer plus(Integer a, Integer b) {
         return allNull(a, b) ? null : defaultIfNull(a, 0) + defaultIfNull(b, 0);
     }
 
@@ -41,10 +33,9 @@ public class Ops {
      *
      * @param a some nullable number
      * @param b another nullable number
-     * @return the sum as described
+     * @return the sum as described, or null if both inputs are null
      */
-    @Nullable
-    public static Long plus(@Nullable Long a, @Nullable Long b) {
+    public static Long plus(Long a, Long b) {
         return allNull(a, b) ? null : defaultIfNull(a, 0L) + defaultIfNull(b, 0L);
     }
 
@@ -54,10 +45,9 @@ public class Ops {
      *
      * @param a some nullable number
      * @param b another nullable number
-     * @return the sum as described
+     * @return the sum as described, or null if both inputs are null
      */
-    @Nullable
-    public static Short plus(@Nullable Short a, @Nullable Short b) {
+    public static Short plus(Short a, Short b) {
         return allNull(a, b) ? null : (short) (defaultIfNull(a, (short) 0) + defaultIfNull(b, (short) 0));
     }
 
@@ -67,10 +57,9 @@ public class Ops {
      *
      * @param a some nullable number
      * @param b another nullable number
-     * @return the sum as described
+     * @return the sum as described, or null if both inputs are null
      */
-    @Nullable
-    public static Float plus(@Nullable Float a, @Nullable Float b) {
+    public static Float plus(Float a, Float b) {
         return allNull(a, b) ? null : defaultIfNull(a, 0f) + defaultIfNull(b, 0f);
     }
 
@@ -80,10 +69,9 @@ public class Ops {
      *
      * @param a some nullable number
      * @param b another nullable number
-     * @return the sum as described
+     * @return the sum as described, or null if both inputs are null
      */
-    @Nullable
-    public static Double plus(@Nullable Double a, @Nullable Double b) {
+    public static Double plus(Double a, Double b) {
         return allNull(a, b) ? null : defaultIfNull(a, 0d) + defaultIfNull(b, 0d);
     }
 
@@ -96,8 +84,7 @@ public class Ops {
      * @return the sum as described, or null if both inputs are null
      * @param <T> the type of objects being added
      */
-    @Nullable
-    public static <T extends Addable<T>> T plus(@Nullable T a, @Nullable T b) {
+    public static <T extends Addable<T>> T plus(T a, T b) {
         return op(a, b, Addable::plus);
     }
 
@@ -107,10 +94,9 @@ public class Ops {
      *
      * @param a some nullable number
      * @param b another nullable number
-     * @return the difference as described
+     * @return the difference as described, or null if both inputs are null
      */
-    @Nullable
-    public static Integer minus(@Nullable Integer a, @Nullable Integer b) {
+    public static Integer minus(Integer a, Integer b) {
         return allNull(a, b) ? null : defaultIfNull(a, 0) - defaultIfNull(b, 0);
     }
 
@@ -120,10 +106,9 @@ public class Ops {
      *
      * @param a some nullable number
      * @param b another nullable number
-     * @return the difference as described
+     * @return the difference as described, or null if both inputs are null
      */
-    @Nullable
-    public static Long minus(@Nullable Long a, @Nullable Long b) {
+    public static Long minus(Long a, Long b) {
         return allNull(a, b) ? null : defaultIfNull(a, 0L) - defaultIfNull(b, 0L);
     }
 
@@ -133,10 +118,9 @@ public class Ops {
      *
      * @param a some nullable number
      * @param b another nullable number
-     * @return the difference as described
+     * @return the difference as described, or null if both inputs are null
      */
-    @Nullable
-    public static Short minus(@Nullable Short a, @Nullable Short b) {
+    public static Short minus(Short a, Short b) {
         return allNull(a, b) ? null : (short) (defaultIfNull(a, (short) 0) - defaultIfNull(b, (short) 0));
     }
 
@@ -146,10 +130,9 @@ public class Ops {
      *
      * @param a some nullable number
      * @param b another nullable number
-     * @return the difference as described
+     * @return the difference as described, or null if both inputs are null
      */
-    @Nullable
-    public static Float minus(@Nullable Float a, @Nullable Float b) {
+    public static Float minus(Float a, Float b) {
         return allNull(a, b) ? null : defaultIfNull(a, 0f) - defaultIfNull(b, 0f);
     }
 
@@ -159,10 +142,9 @@ public class Ops {
      *
      * @param a some nullable number
      * @param b another nullable number
-     * @return the difference as described
+     * @return the difference as described, or null if both inputs are null
      */
-    @Nullable
-    public static Double minus(@Nullable Double a, @Nullable Double b) {
+    public static Double minus(Double a, Double b) {
         return allNull(a, b) ? null : defaultIfNull(a, 0d) - defaultIfNull(b, 0d);
     }
 
@@ -175,8 +157,7 @@ public class Ops {
      * @return the difference as described, or null if both inputs are null
      * @param <T> the type of objects being subtracted
      */
-    @Nullable
-    public static <T extends Subtractable<T>> T minus(@Nullable T a, @Nullable T b) {
+    public static <T extends Subtractable<T>> T minus(T a, T b) {
         return op(a, b, Subtractable::minus);
     }
 
@@ -186,10 +167,9 @@ public class Ops {
      *
      * @param a some nullable number
      * @param b another nullable number
-     * @return the product as described
+     * @return the product as described, or null if both inputs are null
      */
-    @Nullable
-    public static Integer times(@Nullable Integer a, @Nullable Integer b) {
+    public static Integer times(Integer a, Integer b) {
         return allNull(a, b) ? null : defaultIfNull(a, 1) * defaultIfNull(b, 1);
     }
 
@@ -199,10 +179,9 @@ public class Ops {
      *
      * @param a some nullable number
      * @param b another nullable number
-     * @return the product as described
+     * @return the product as described, or null if both inputs are null
      */
-    @Nullable
-    public static Long times(@Nullable Long a, @Nullable Long b) {
+    public static Long times(Long a, Long b) {
         return allNull(a, b) ? null : defaultIfNull(a, 1L) * defaultIfNull(b, 1L);
     }
 
@@ -212,10 +191,9 @@ public class Ops {
      *
      * @param a some nullable number
      * @param b another nullable number
-     * @return the product as described
+     * @return the product as described, or null if both inputs are null
      */
-    @Nullable
-    public static Short times(@Nullable Short a, @Nullable Short b) {
+    public static Short times(Short a, Short b) {
         return allNull(a, b) ? null : (short) (defaultIfNull(a, (short) 1) * defaultIfNull(b, (short) 1));
     }
 
@@ -225,10 +203,9 @@ public class Ops {
      *
      * @param a some nullable number
      * @param b another nullable number
-     * @return the product as described
+     * @return the product as described, or null if both inputs are null
      */
-    @Nullable
-    public static Float times(@Nullable Float a, @Nullable Float b) {
+    public static Float times(Float a, Float b) {
         return allNull(a, b) ? null : defaultIfNull(a, 1f) * defaultIfNull(b, 1f);
     }
 
@@ -238,10 +215,9 @@ public class Ops {
      *
      * @param a some nullable number
      * @param b another nullable number
-     * @return the product as described
+     * @return the product as described, or null if both inputs are null
      */
-    @Nullable
-    public static Double times(@Nullable Double a, @Nullable Double b) {
+    public static Double times(Double a, Double b) {
         return allNull(a, b) ? null : defaultIfNull(a, 1d) * defaultIfNull(b, 1d);
     }
 
@@ -254,8 +230,7 @@ public class Ops {
      * @return the product as described, or null if both inputs are null
      * @param <T> the type of objects being multiplied
      */
-    @Nullable
-    public static <T extends Multipliable<T>> T times(@Nullable T a, @Nullable T b) {
+    public static <T extends Multipliable<T>> T times(T a, T b) {
         return op(a, b, Multipliable::times);
     }
 
@@ -265,10 +240,9 @@ public class Ops {
      *
      * @param a some nullable number
      * @param b another nullable number
-     * @return the quotient as described
+     * @return the quotient as described, or null if both inputs are null
      */
-    @Nullable
-    public static Integer div(@Nullable Integer a, @Nullable Integer b) {
+    public static Integer div(Integer a, Integer b) {
         return allNull(a, b) ? null : defaultIfNull(a, 1) / defaultIfNull(b, 1);
     }
 
@@ -278,10 +252,9 @@ public class Ops {
      *
      * @param a some nullable number
      * @param b another nullable number
-     * @return the quotient as described
+     * @return the quotient as described, or null if both inputs are null
      */
-    @Nullable
-    public static Long div(@Nullable Long a, @Nullable Long b) {
+    public static Long div(Long a, Long b) {
         return allNull(a, b) ? null : defaultIfNull(a, 1L) / defaultIfNull(b, 1L);
     }
 
@@ -291,10 +264,9 @@ public class Ops {
      *
      * @param a some nullable number
      * @param b another nullable number
-     * @return the quotient as described
+     * @return the quotient as described, or null if both inputs are null
      */
-    @Nullable
-    public static Short div(@Nullable Short a, @Nullable Short b) {
+    public static Short div(Short a, Short b) {
         return allNull(a, b) ? null : (short) (defaultIfNull(a, (short) 1) / defaultIfNull(b, (short) 1));
     }
 
@@ -304,10 +276,9 @@ public class Ops {
      *
      * @param a some nullable number
      * @param b another nullable number
-     * @return the quotient as described
+     * @return the quotient as described, or null if both inputs are null
      */
-    @Nullable
-    public static Float div(@Nullable Float a, @Nullable Float b) {
+    public static Float div(Float a, Float b) {
         return allNull(a, b) ? null : defaultIfNull(a, 1f) / defaultIfNull(b, 1f);
     }
 
@@ -317,10 +288,9 @@ public class Ops {
      *
      * @param a some nullable number
      * @param b another nullable number
-     * @return the quotient as described
+     * @return the quotient as described, or null if both inputs are null
      */
-    @Nullable
-    public static Double div(@Nullable Double a, @Nullable Double b) {
+    public static Double div(Double a, Double b) {
         return allNull(a, b) ? null : defaultIfNull(a, 1d) / defaultIfNull(b, 1d);
     }
 
@@ -333,8 +303,7 @@ public class Ops {
      * @return the quotient as described, or null if both inputs are null
      * @param <T> the type of objects being divided
      */
-    @Nullable
-    public static <T extends Dividable<T>> T div(@Nullable T a, @Nullable T b) {
+    public static <T extends Dividable<T>> T div(T a, T b) {
         return op(a, b, Dividable::div);
     }
 
@@ -344,10 +313,9 @@ public class Ops {
      *
      * @param value some nullable number
      * @param factor a nullable factor
-     * @return the scaled result as described, rounded to the nearest integer
+     * @return the scaled result rounded to the nearest integer as described, or null if {@code value} is null
      */
-    @Nullable
-    public static Integer scale(@Nullable Integer value, @Nullable Double factor) {
+    public static Integer scale(Integer value, Double factor) {
         return value != null ? (int) Math.round(value * defaultIfNull(factor, 1d)) : null;
     }
 
@@ -357,10 +325,9 @@ public class Ops {
      *
      * @param value some nullable number
      * @param factor a nullable factor
-     * @return the scaled result as described, rounded to the nearest (long) integer
+     * @return the scaled result rounded to the nearest (long) integer as described, or null if {@code value} is null
      */
-    @Nullable
-    public static Long scale(@Nullable Long value, @Nullable Double factor) {
+    public static Long scale(Long value, Double factor) {
         return value != null ? Math.round(value * defaultIfNull(factor, 1d)) : null;
     }
 
@@ -370,10 +337,9 @@ public class Ops {
      *
      * @param value some nullable number
      * @param factor a nullable factor
-     * @return the scaled result as described, rounded to the nearest (short) integer
+     * @return the scaled result rounded to the nearest (short) integer as described, or null if {@code value} is null
      */
-    @Nullable
-    public static Short scale(@Nullable Short value, @Nullable Double factor) {
+    public static Short scale(Short value, Double factor) {
         return value != null ? (short) Math.round(value * defaultIfNull(factor, 1d)) : null;
     }
 
@@ -383,10 +349,9 @@ public class Ops {
      *
      * @param value some nullable number
      * @param factor a nullable factor
-     * @return the scaled result as described
+     * @return the scaled result as described, or null if {@code value} is null
      */
-    @Nullable
-    public static Float scale(@Nullable Float value, @Nullable Double factor) {
+    public static Float scale(Float value, Double factor) {
         return value != null ? (float) (value * defaultIfNull(factor, 1d)) : null;
     }
 
@@ -396,10 +361,9 @@ public class Ops {
      *
      * @param value some nullable number
      * @param factor a nullable factor
-     * @return the scaled result as described
+     * @return the scaled result as described, or null if {@code value} is null
      */
-    @Nullable
-    public static Double scale(@Nullable Double value, @Nullable Double factor) {
+    public static Double scale(Double value, Double factor) {
         return value != null ? value * defaultIfNull(factor, 1d) : null;
     }
 
@@ -409,10 +373,9 @@ public class Ops {
      *
      * @param value some nullable number
      * @param factor a nullable factor
-     * @return the scaled result as described
+     * @return the scaled result as described, or null if {@code value} is null
      */
-    @Nullable
-    public static <T extends Scalable<T>> T scale(@Nullable T value, @Nullable Double factor) {
+    public static <T extends Scalable<T>> T scale(T value, Double factor) {
         return apply(value, factor, Scalable::scale);
     }
 
@@ -421,12 +384,11 @@ public class Ops {
      *
      * @param value some nullable value
      * @param opFunction the operation to perform
-     * @return the result as described
+     * @return the result as described, or null if {@code value} is null
      * @param <T> the type of object being operated on
      * @param <R> the type of result
      */
-    @Nullable
-    public static <T, R> R map(@Nullable T value, Function<T, R> opFunction) {
+    public static <T, R> R map(T value, Function<T, R> opFunction) {
         return value != null ? opFunction.apply(value) : null;
     }
 
@@ -437,11 +399,10 @@ public class Ops {
      * @param a some nullable object
      * @param b another nullable object
      * @param opFunction the operation to perform
-     * @return the result as described
+     * @return the result as described, or null if both inputs are null
      * @param <T> the type of objects being operated upon
      */
-    @Nullable
-    public static <T> T op(@Nullable T a, @Nullable T b, BinaryOperator<T> opFunction) {
+    public static <T> T op(T a, T b, BinaryOperator<T> opFunction) {
         if (a == null) return b;
         else if (b == null) return a;
         else return opFunction.apply(a, b);
@@ -454,11 +415,10 @@ public class Ops {
      * @param receiver some nullable object
      * @param other another nullable object
      * @param opFunction the operation to perform
-     * @return the result as described
+     * @return the result as described, or null if {@code receiver} is null
      * @param <T> the type of objects being operated upon
      */
-    @Nullable
-    public static <T, U> T apply(@Nullable T receiver, @Nullable U other, BiFunction<T, U, T> opFunction) {
+    public static <T, U> T apply(T receiver, U other, BiFunction<T, U, T> opFunction) {
         if (receiver == null) return null;
         else if (other == null) return receiver;
         else return opFunction.apply(receiver, other);
@@ -471,7 +431,7 @@ public class Ops {
      * @param b another nullable object
      * @return true if both objects are null; false if either or both is non-null
      */
-    private static boolean allNull(@Nullable Object a, @Nullable Object b) {
+    private static boolean allNull(Object a, Object b) {
         return a == null && b == null;
     }
 
